@@ -30,8 +30,7 @@ public class GusList implements EntryPoint {
 		return glView;
 	}
 	
-	public void viewAdDataFromServer() {
-		AdData[] results = null;
+	public void viewAdDataFromServer(){
 		adDataService.getAdDataFromServer(
 				new AsyncCallback<AdData>() {
 					public void onFailure(Throwable caught) {

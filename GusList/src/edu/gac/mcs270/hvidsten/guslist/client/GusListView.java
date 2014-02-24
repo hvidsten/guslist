@@ -21,7 +21,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.gac.mcs270.hvidsten.guslist.shared.AdData;
-import edu.gac.mcs270.hvidsten.guslist.shared.FieldVerifier;
 
 public class GusListView {
 	private GusList control;
