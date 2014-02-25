@@ -58,23 +58,19 @@ public class GusListView {
 		
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		rootPanel.add(horizontalPanel, 10, 79);
-		horizontalPanel.setSize("412px", "211px");
 		
 		makeSideBar(horizontalPanel);
 		
 		VerticalPanel dataListPanel = new VerticalPanel();
 		horizontalPanel.add(dataListPanel);
-		dataListPanel.setSize("321px", "214px");
 		
 		FlowPanel flowPanel = new FlowPanel();
 		dataListPanel.add(flowPanel);
-		flowPanel.setSize("450px", "33px");
 		
 		Label progTitlebar = new Label("GusList");
 		progTitlebar.addStyleName("appTitleBar");
 		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		flowPanel.add(progTitlebar);
-		progTitlebar.setHeight("28px");
 		
 		makePostTable(posts, flowPanel);
 	}
