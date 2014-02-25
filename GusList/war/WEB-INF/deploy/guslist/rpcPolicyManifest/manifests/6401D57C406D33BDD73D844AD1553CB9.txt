@@ -1,2 +1,0 @@
-serviceClass: edu.gac.mcs270.hvidsten.guslist.client.AdDataService
-path: B4481AA666597073B6CA4CE424569C96.gwt.rpc

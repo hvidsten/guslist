@@ -5,6 +5,8 @@
 
 package edu.gac.mcs270.hvidsten.guslist.client;
 
+import java.util.List;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
@@ -20,7 +22,7 @@ import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import edu.gac.mcs270.hvidsten.guslist.shared.AdData;
+import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
 
 public class GusListView {
 	private GusList control;
@@ -47,7 +49,9 @@ public class GusListView {
 		makeSideBar(horizontalPanel);
 	}
 
-	public void viewAdData(AdData data) {
+	public void viewPostData(List<PostData> posts) {
+		if(posts==null) return;
+		
 		RootPanel rootPanel = RootPanel.get();
 		rootPanel.clear();
 		makeMenuBar(rootPanel);
@@ -63,16 +67,49 @@ public class GusListView {
 		dataListPanel.setSize("321px", "214px");
 		
 		FlowPanel flowPanel = new FlowPanel();
-		rootPanel.add(flowPanel, 0, 0);
+		dataListPanel.add(flowPanel);
 		flowPanel.setSize("450px", "33px");
 		
 		Label progTitlebar = new Label("GusList");
-		progTitlebar.setStyleName("h1");
+		progTitlebar.addStyleName("appTitleBar");
 		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		flowPanel.add(progTitlebar);
 		progTitlebar.setHeight("28px");
+		
+		makePostTable(posts, flowPanel);
 	}
 	
+	private void makePostTable(List<PostData> posts, FlowPanel flowPanel) {
+		for(PostData post: posts){
+			flowPanel.add(makePostRow(post));
+		}
+	}
+
+	private HorizontalPanel makePostRow(PostData post) {
+		HorizontalPanel row = new HorizontalPanel();
+		Label titleLabel = new Label(post.getTitle());
+		titleLabel.addStyleName("postLabel");
+		Label descrLabel = new Label(post.getDescription());
+		descrLabel.addStyleName("postLabel");
+		Label priceLabel = new Label("$"+post.getPrice());
+		priceLabel.addStyleName("postLabel");
+		Button infoButton = new Button("More Info");
+		infoButton.addStyleName("postInfoButton");
+		infoButton.setText("More Info");
+		//add a clickListener to the button
+		infoButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				// To Do
+			}
+	      });
+		row.add(titleLabel);
+		row.add(descrLabel);
+		row.add(priceLabel);
+		row.add(infoButton);
+		return row;
+	}
+
 	public void makeMenuBar(RootPanel rp){
 		MenuBar menuBar = new MenuBar(false);
 		rp.add(menuBar, 94, 39);
@@ -80,6 +117,7 @@ public class GusListView {
 		
 		MenuItem menuHomeItem = new MenuItem("Home", false, new Command() {
 			public void execute() {
+				viewWelcomePage();
 			}
 		});
 		menuHomeItem.setHTML("Home");

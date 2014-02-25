@@ -1,17 +1,17 @@
 package edu.gac.mcs270.hvidsten.guslist.client;
 
-import edu.gac.mcs270.hvidsten.guslist.shared.AdData;
-import edu.gac.mcs270.hvidsten.guslist.shared.FieldVerifier;
+import java.util.List;
+
+import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class GusList implements EntryPoint {
 	private final GusListView glView = new GusListView();
-	private final AdDataServiceAsync adDataService = GWT
-			.create(AdDataService.class);
+	private final PostDataServiceAsync postDataService = GWT
+			.create(PostDataService.class);
 
 	public void onModuleLoad() {
 	    // Wire controller to view
@@ -31,15 +31,16 @@ public class GusList implements EntryPoint {
 	}
 	
 	public void viewAdDataFromServer(){
-		adDataService.getAdDataFromServer(
-				new AsyncCallback<AdData>() {
+		System.out.println("got here- control - pre servlet");
+		postDataService.getPostDataFromServer(
+				new AsyncCallback<List<PostData>>() {
 					public void onFailure(Throwable caught) {
 						return;
 					}
 
 					@Override
-					public void onSuccess(AdData data) {
-						glView.viewAdData(data);
+					public void onSuccess(List<PostData> data) {
+						glView.viewPostData(data);
 					}
 				});
 	}
