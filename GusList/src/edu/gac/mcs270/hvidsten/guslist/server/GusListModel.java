@@ -27,4 +27,10 @@ public class GusListModel {
 		
 		return data;
 	}
+	
+	public static void addPost(PostData post){
+		
+		System.out.printf("Post - Title: %s Description: %s Price: %d");
+		
+	}
 }

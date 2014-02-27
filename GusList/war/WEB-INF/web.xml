@@ -16,6 +16,16 @@
     <url-pattern>/guslist/postdata</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>addPostDataServiceImpl</servlet-name>
+    <servlet-class>edu.gac.mcs270.hvidsten.guslist.server.addPostDataServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>addPostDataServiceImpl</servlet-name>
+    <url-pattern>/guslist/addpost</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>GusList.html</welcome-file>

@@ -20,6 +20,8 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
@@ -146,7 +148,7 @@ public class GusListView {
 		postAdButton.addClickHandler(new ClickHandler(){
 			
 			public void onClick(ClickEvent event){
-				control
+				viewAddPostPage();
 			}
 			
 		});
@@ -168,4 +170,72 @@ public class GusListView {
 		sidePanel.add(adminHyperlink);
 		
 	}
+	
+	public void viewAddPostPage(){
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.clear();
+		makeMenuBar(rootPanel);
+		
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		rootPanel.add(horizontalPanel, 10, 79);
+		horizontalPanel.setSize("412px", "211px");
+		
+		makeSideBar(horizontalPanel);
+		
+		VerticalPanel addPostPanel = new VerticalPanel();
+		horizontalPanel.add(addPostPanel);
+		
+		FlowPanel flowPanel = new FlowPanel();
+		addPostPanel.add(flowPanel);
+		
+		Label progTitlebar = new Label("Add Post");
+		progTitlebar.addStyleName("appTitleBar");
+		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		flowPanel.add(progTitlebar);
+		
+		//name of the poster
+		HorizontalPanel namePanel = new HorizontalPanel();
+		Label name = new Label("Name:");
+		TextBox nameTextBox = new TextBox();
+		
+		namePanel.add(name);
+		namePanel.add(nameTextBox);
+		
+		flowPanel.add(namePanel);
+		
+		//the title of the post
+		HorizontalPanel titlePanel = new HorizontalPanel();
+		Label title = new Label("Title:");
+		TextBox titleTextBox = new TextBox();
+		
+		titlePanel.add(title);
+		titlePanel.add(titleTextBox);
+		
+		flowPanel.add(titlePanel);
+		
+		//a description of the post
+		VerticalPanel descriptionPanel = new VerticalPanel();
+		Label description = new Label("Description");
+		TextArea descriptionTextBox = new TextArea();
+		
+		descriptionPanel.add(description);
+		descriptionPanel.add(descriptionTextBox);
+		
+		flowPanel.add(descriptionPanel);
+		
+		//a price
+		HorizontalPanel pricePanel = new HorizontalPanel();
+		Label price = new Label("Price:");
+		TextBox priceTextBox = new TextBox();
+		
+		titlePanel.add(price);
+		titlePanel.add(priceTextBox);
+		
+		flowPanel.add(pricePanel);		
+		
+		
+		
+		
+	}
+	
 }
