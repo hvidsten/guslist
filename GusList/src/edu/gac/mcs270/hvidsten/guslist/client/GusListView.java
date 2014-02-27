@@ -143,16 +143,16 @@ public class GusListView {
 		Button postAdButton = new Button("Post Ad");
 		postAdButton.setStyleName("sideBarButton");
 		postAdButton.setText("Post Ad");
-		sidePanel.add(postAdButton);
 		postAdButton.addClickHandler(new ClickHandler() {
+			@Override
 			public void onClick(ClickEvent evet) {
-				return;
+				control.postAdToServer();
 			}
 		});
+		sidePanel.add(postAdButton);
 		Button viewAdsButton = new Button("View Ads");
 		viewAdsButton.setStyleName("sideBarButton");
 		viewAdsButton.setText("View Ads");
-		//add a clickListener to the button
 		viewAdsButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {

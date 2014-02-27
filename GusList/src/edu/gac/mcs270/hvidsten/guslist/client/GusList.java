@@ -30,6 +30,12 @@ public class GusList implements EntryPoint {
 		return glView;
 	}
 	
+	// TODO Make this actually post
+	public void postAdToServer() {
+		System.out.println("Message succesfully passed");
+		
+	}
+	
 	public void viewAdDataFromServer(){
 		System.out.println("got here- control - pre servlet");
 		postDataService.getPostDataFromServer(
