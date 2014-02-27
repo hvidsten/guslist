@@ -48,6 +48,18 @@ public class GusListView {
 		
 		makeSideBar(horizontalPanel);
 	}
+	
+	public void createPostForm(){
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.clear();
+		makeMenuBar(rootPanel);
+		
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		rootPanel.add(horizontalPanel, 10, 79);
+		
+		makeSideBar(horizontalPanel);
+		
+	}
 
 	public void viewPostData(List<PostData> posts) {
 		if(posts==null) return;
@@ -143,8 +155,14 @@ public class GusListView {
 		Button postAdButton = new Button("Post Ad");
 		postAdButton.setStyleName("sideBarButton");
 		postAdButton.setText("Post Ad");
-		sidePanel.add(postAdButton);
+		postAdButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				createPostForm();
+			}
+	      });
 		
+		sidePanel.add(postAdButton);
 		Button viewAdsButton = new Button("View Ads");
 		viewAdsButton.setStyleName("sideBarButton");
 		viewAdsButton.setText("View Ads");
