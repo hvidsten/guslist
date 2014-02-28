@@ -11,15 +11,15 @@
     <servlet-class>edu.gac.mcs270.hvidsten.guslist.server.PostDataServiceImpl</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>addPostDataServiceImpl</servlet-name>
+    <servlet-class>edu.gac.mcs270.hvidsten.guslist.server.AddPostDataServiceImpl</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>postDataServiceImpl</servlet-name>
     <url-pattern>/guslist/postdata</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>addPostDataServiceImpl</servlet-name>
-    <servlet-class>edu.gac.mcs270.hvidsten.guslist.server.addPostDataServiceImpl</servlet-class>
-  </servlet>
   
   <servlet-mapping>
     <servlet-name>addPostDataServiceImpl</servlet-name>
