@@ -10,6 +10,7 @@ import java.util.List;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -24,7 +25,9 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import edu.gac.mcs270.hvidsten.guslist.shared.Buyer;
 import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
+import edu.gac.mcs270.hvidsten.guslist.shared.Seller;
 
 public class GusListView {
 	private GusList control;
@@ -196,7 +199,9 @@ public class GusListView {
 		//name of the poster
 		HorizontalPanel namePanel = new HorizontalPanel();
 		Label name = new Label("Name:");
-		TextBox nameTextBox = new TextBox();
+		final TextBox nameTextBox = new TextBox();
+
+		
 		
 		namePanel.add(name);
 		namePanel.add(nameTextBox);
@@ -206,7 +211,7 @@ public class GusListView {
 		//the title of the post
 		HorizontalPanel titlePanel = new HorizontalPanel();
 		Label title = new Label("Title:");
-		TextBox titleTextBox = new TextBox();
+		final TextBox titleTextBox = new TextBox();
 		
 		titlePanel.add(title);
 		titlePanel.add(titleTextBox);
@@ -216,7 +221,7 @@ public class GusListView {
 		//a description of the post
 		VerticalPanel descriptionPanel = new VerticalPanel();
 		Label description = new Label("Description");
-		TextArea descriptionTextBox = new TextArea();
+		final TextArea descriptionTextBox = new TextArea();
 		
 		descriptionPanel.add(description);
 		descriptionPanel.add(descriptionTextBox);
@@ -226,7 +231,7 @@ public class GusListView {
 		//a price
 		HorizontalPanel pricePanel = new HorizontalPanel();
 		Label price = new Label("Price:");
-		TextBox priceTextBox = new TextBox();
+		final TextBox priceTextBox = new TextBox();
 		
 		titlePanel.add(price);
 		titlePanel.add(priceTextBox);
@@ -234,6 +239,22 @@ public class GusListView {
 		flowPanel.add(pricePanel);		
 		
 		
+		Button submit = new Button("Submit");
+		submit.addClickHandler(new ClickHandler() {
+			@Override
+			//public PostData(String t, String d, double p, Seller s, Buyer b)
+			public void onClick(ClickEvent event) {
+				String title = titleTextBox.getText();
+				String description = descriptionTextBox.getText();
+				Double price = Double.parseDouble(priceTextBox.getText());
+				Seller seller = new Seller(nameTextBox.getText());
+				
+				
+				PostData post = new PostData(title, description, price, seller, null);
+				control.addPostDataToServer(post);
+			}
+	      });
+		addPostPanel.add(submit);
 		
 		
 	}

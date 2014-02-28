@@ -11,8 +11,8 @@ public class AddPostDataServiceImpl extends RemoteServiceServlet implements AddP
 
 	@Override
 	public void addPostDataToServer(PostData post) {
-
-
+		GusListModel.addPost(post);
+		//System.out.println("got to server");
 	}
 
 }

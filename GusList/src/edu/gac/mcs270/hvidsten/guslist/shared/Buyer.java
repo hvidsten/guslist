@@ -8,7 +8,17 @@ public class Buyer  implements IsSerializable{
 	public Buyer() {}
 	
 	public Buyer(String string) {
-		name = string;
+		setName(string);
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 
 }

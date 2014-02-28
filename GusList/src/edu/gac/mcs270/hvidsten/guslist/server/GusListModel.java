@@ -30,7 +30,7 @@ public class GusListModel {
 	
 	public static void addPost(PostData post){
 		
-		System.out.printf("Post - Title: %s Description: %s Price: %d");
+		System.out.printf("Post: title = %s, description = %s, price = %f, seller = %s", post.getTitle(), post.getDescription(), post.getPrice(), post.getSeller().getName());
 		
 	}
 }
