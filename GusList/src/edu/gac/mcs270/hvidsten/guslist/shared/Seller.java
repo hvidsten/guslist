@@ -10,4 +10,8 @@ public class Seller  implements IsSerializable{
 	public Seller(String string) {
 		name = string;
 	}
+	
+	public String getName() {
+		return name;
+	}
 }

@@ -27,4 +27,12 @@ public class GusListModel {
 		
 		return data;
 	}
+	
+	public static void makePost(PostData post) {
+		String title = post.getTitle();
+		String description = post.getDescription();
+		double price = post.getPrice();
+		String seller = post.getSeller().getName();
+		System.out.println(title + description + price + seller);
+	}
 }

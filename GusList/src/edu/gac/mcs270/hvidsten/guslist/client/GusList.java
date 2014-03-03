@@ -32,6 +32,9 @@ public class GusList implements EntryPoint {
 	
 	// TODO Make this actually post
 	public void postAdToServer() {
+		System.out.println("Message passed");
+	}
+	public void postAdToServer(PostData data) {
 		System.out.println("Message succesfully passed");
 		
 	}

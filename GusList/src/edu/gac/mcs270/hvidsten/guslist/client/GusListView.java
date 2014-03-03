@@ -20,9 +20,12 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
+import edu.gac.mcs270.hvidsten.guslist.shared.Seller;
 
 public class GusListView {
 	private GusList control;
@@ -51,7 +54,7 @@ public class GusListView {
 
 	public void viewPostData(List<PostData> posts) {
 		if(posts==null) return;
-		
+//		TODO refactor this
 		RootPanel rootPanel = RootPanel.get();
 		rootPanel.clear();
 		makeMenuBar(rootPanel);
@@ -75,6 +78,87 @@ public class GusListView {
 		makePostTable(posts, flowPanel);
 	}
 	
+	public void makePost(){
+//		TODO should be able to refactor this
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.clear();
+		makeMenuBar(rootPanel);
+
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		rootPanel.add(horizontalPanel, 10, 79);
+		horizontalPanel.setSize("412px", "211px");
+
+		makeSideBar(horizontalPanel);
+
+		VerticalPanel addPostPanel = new VerticalPanel();
+		horizontalPanel.add(addPostPanel);
+
+		FlowPanel flowPanel = new FlowPanel();
+		addPostPanel.add(flowPanel);
+
+		Label progTitlebar = new Label("Make Post");
+		progTitlebar.addStyleName("appTitleBar");
+		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		flowPanel.add(progTitlebar);
+
+		HorizontalPanel namePanel = new HorizontalPanel();
+		Label name = new Label("Name:");
+		final TextBox nameTextBox = new TextBox();
+//		TextBox nameTextBox = new TextBox(); needs final...
+
+		namePanel.add(name);
+		namePanel.add(nameTextBox);
+
+		flowPanel.add(namePanel);
+
+		HorizontalPanel titlePanel = new HorizontalPanel();
+		Label title = new Label("Title:");
+		final TextBox titleTextBox = new TextBox();
+//		TextBox titleTextBox = new TextBox(); needs final...
+		
+		titlePanel.add(title);
+		titlePanel.add(titleTextBox);
+
+		flowPanel.add(titlePanel);
+
+		VerticalPanel descriptionPanel = new VerticalPanel();
+		Label description = new Label("Description");
+		final TextArea descriptionTextBox = new TextArea();
+
+		descriptionPanel.add(description);
+		descriptionPanel.add(descriptionTextBox);
+
+		flowPanel.add(descriptionPanel);
+
+		HorizontalPanel pricePanel = new HorizontalPanel();
+		Label price = new Label("Price:");
+		final TextBox priceTextBox = new TextBox();
+
+		titlePanel.add(price);
+		titlePanel.add(priceTextBox);
+
+		flowPanel.add(pricePanel);		
+
+		Button submit = new Button("Submit");
+		submit.addClickHandler(new ClickHandler() {
+			@Override
+			//public PostData(String t, String d, double p, Seller s, Buyer b)
+			public void onClick(ClickEvent event) {
+				String title = titleTextBox.getText();
+				String description = descriptionTextBox.getText();
+				Double price = Double.parseDouble(priceTextBox.getText());
+				Seller seller = new Seller(nameTextBox.getText());
+
+
+				PostData post = new PostData(title, description, price, seller, null);
+				control.postAdToServer(post);
+			}
+	      });
+		addPostPanel.add(submit);
+
+
+	}
+	
 	private void makePostTable(List<PostData> posts, FlowPanel flowPanel) {
 		for(PostData post: posts){
 			flowPanel.add(makePostRow(post));
@@ -96,7 +180,7 @@ public class GusListView {
 		infoButton.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
-				// To Do
+				//TODO do something here, yo
 			}
 	      });
 		row.add(titleLabel);
@@ -145,8 +229,8 @@ public class GusListView {
 		postAdButton.setText("Post Ad");
 		postAdButton.addClickHandler(new ClickHandler() {
 			@Override
-			public void onClick(ClickEvent evet) {
-				control.postAdToServer();
+			public void onClick(ClickEvent event) {
+				makePost();
 			}
 		});
 		sidePanel.add(postAdButton);
