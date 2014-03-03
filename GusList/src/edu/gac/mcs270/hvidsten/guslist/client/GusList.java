@@ -44,4 +44,7 @@ public class GusList implements EntryPoint {
 					}
 				});
 	}
+	public void postAdDataToServer(){
+		
+	}
 }

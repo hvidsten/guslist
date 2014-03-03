@@ -7,6 +7,8 @@ package edu.gac.mcs270.hvidsten.guslist.client;
 
 import java.util.List;
 
+
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
@@ -21,10 +23,10 @@ import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-
+import com.google.gwt.user.client.ui.TextBox;
 import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
 
-public class GusListView {
+public class GusListView {	
 	private GusList control;
 
 	public GusListView(){}
@@ -73,6 +75,33 @@ public class GusListView {
 		flowPanel.add(progTitlebar);
 		
 		makePostTable(posts, flowPanel);
+	}
+	
+	public void makePostData() {
+		
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.clear();
+		makeMenuBar(rootPanel);
+		
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		rootPanel.add(horizontalPanel, 10, 79);
+		
+		makeSideBar(horizontalPanel);
+		
+		VerticalPanel dataListPanel = new VerticalPanel();
+		horizontalPanel.add(dataListPanel);
+		
+		FlowPanel flowPanel = new FlowPanel();
+		dataListPanel.add(flowPanel);
+		
+		Label progTitlebar = new Label("Post an Ad:");
+		progTitlebar.addStyleName("appTitleBar");
+		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		flowPanel.add(progTitlebar);
+		
+		final TextBox nameField = new TextBox();
+		flowPanel.add(nameField);
+		
 	}
 	
 	private void makePostTable(List<PostData> posts, FlowPanel flowPanel) {
@@ -143,7 +172,14 @@ public class GusListView {
 		Button postAdButton = new Button("Post Ad");
 		postAdButton.setStyleName("sideBarButton");
 		postAdButton.setText("Post Ad");
+		postAdButton.addClickHandler(new ClickHandler(){
+			public void onClick(ClickEvent event) {
+				//control.
+			}
+		});
+		
 		sidePanel.add(postAdButton);
+		
 		
 		Button viewAdsButton = new Button("View Ads");
 		viewAdsButton.setStyleName("sideBarButton");
