@@ -24,6 +24,8 @@ public class GusListModel {
 				 new Seller("Joe Cool"), new Buyer("Jill Cool")));
 		data.add(new PostData("book", "Moby Dick - a classic!", 2.0,
 				 new Seller("Hermann Melville"), new Buyer("Mark Twain")));
+		data.add(new PostData("game", "Clue", "mustard@gac.edu", 17.99, new Seller("Colonol Mustard"),
+				new Buyer("Candlestick")));
 		
 		return data;
 	}

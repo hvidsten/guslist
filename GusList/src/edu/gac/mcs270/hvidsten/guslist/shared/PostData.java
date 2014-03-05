@@ -7,6 +7,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class PostData implements IsSerializable {
 	private String title="no title";
 	private String description="empty";
+	private String email="empty";
 	private double price=0.0;
 	private Seller seller=null;
 	private Buyer buyer=null;
@@ -14,9 +15,18 @@ public class PostData implements IsSerializable {
 	// GWT serializable Objects need a no=argument constructor
 	public PostData() {}
 	
-	public PostData(String t, String d, double p, Seller s, Buyer b){
+	public PostData(String t, String d, double p, Seller s, Buyer b) {
 		title = t;
 		description = d;
+		price = p;
+		seller = s;
+		buyer = b;
+	}
+	
+	public PostData(String t, String d, String e, double p, Seller s, Buyer b){
+		title = t;
+		description = d;
+		email = e;
 		price = p;
 		seller = s;
 		buyer = b;
@@ -28,6 +38,10 @@ public class PostData implements IsSerializable {
 	
 	public String getDescription() {
 		return description;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 	
 	public double getPrice(){
