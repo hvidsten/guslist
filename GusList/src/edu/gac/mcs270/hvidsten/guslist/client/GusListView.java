@@ -133,7 +133,7 @@ public class GusListView {
 		
 		final Label description = new Label("description: ");
 		flowPanel.add(description);
-		TextArea descriptionArea = new TextArea();
+		final TextArea descriptionArea = new TextArea();
 		flowPanel.add(descriptionArea);
 		
 		Button submitButton = new Button("submit");
@@ -146,8 +146,8 @@ public class GusListView {
 		submitButton.addClickHandler(new ClickHandler(){
 			public void onClick(ClickEvent event) {
 				System.out.println("Submitting data to the server.");
-				control.postAdDataToServer(new PostData(titleField.getText(), description.getText(), Double.parseDouble(priceField.getText()), new Seller(nameField.getText())));
-				control.viewAdDataFromServer();
+				control.postAdDataToServer(new PostData(titleField.getText(), descriptionArea.getText(), Double.parseDouble(priceField.getText()), new Seller(nameField.getText()), null));
+				
 			}
 		});
 		

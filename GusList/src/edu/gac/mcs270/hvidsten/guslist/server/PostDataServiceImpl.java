@@ -14,14 +14,11 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class PostDataServiceImpl extends RemoteServiceServlet implements
 		PostDataService {
 
-	private GusListModel Model = new GusListModel();
+	
 	public List<PostData> getPostDataFromServer() { 
-		List data = Model.getPostData();
+		List<PostData> data = GusListModel.getPostData();
 		return data;
 	}
 	
-	public void addPostDataToServer(PostData post){
-		Model.addPostData(post);
-	}
 	
 }

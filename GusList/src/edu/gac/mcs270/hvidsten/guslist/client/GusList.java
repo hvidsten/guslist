@@ -12,6 +12,8 @@ public class GusList implements EntryPoint {
 	private final GusListView glView = new GusListView();
 	private final PostDataServiceAsync postDataService = GWT
 			.create(PostDataService.class);
+	private final AdPostDataServiceAsync adPostDataService = GWT
+			.create(AdPostDataService.class);
 
 	public void onModuleLoad() {
 	    // Wire controller to view
@@ -45,8 +47,8 @@ public class GusList implements EntryPoint {
 				});
 	}
 	public void postAdDataToServer(PostData post){
-		System.out.println("I have no idea what is supposed to go here!");
-		postDataService.addPostDataToServer(post,
+		System.out.println("Got here- whatever - pre servlet even better");
+		adPostDataService.addPostDataToServer(post,
 				new AsyncCallback<Void>() {
 					public void onFailure(Throwable caught) {
 						return;
@@ -55,7 +57,8 @@ public class GusList implements EntryPoint {
 					@Override
 					public void onSuccess(Void result) {
 						// TODO Auto-generated method stub
-						
+						System.out.println(",jhklj");
+						glView.viewWelcomePage();
 					}
 				});
 		
