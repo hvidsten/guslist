@@ -27,4 +27,8 @@ public class GusListModel {
 		
 		return data;
 	}
+	
+	public static void printPost(PostData post) {
+		System.out.printf("Name: %s, Description: %s, Price: %f, Seller: %s\n ", post.getTitle(), post.getDescription(), post.getPrice(),post.getSeller().getName());
+	}
 }

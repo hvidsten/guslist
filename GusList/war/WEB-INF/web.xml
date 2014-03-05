@@ -11,9 +11,19 @@
     <servlet-class>edu.gac.mcs270.hvidsten.guslist.server.PostDataServiceImpl</servlet-class>
   </servlet>
   
+    <servlet>
+    <servlet-name>adPostDataServiceImpl</servlet-name>
+    <servlet-class>edu.gac.mcs270.hvidsten.guslist.server.AdPostDataServiceImpl</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>postDataServiceImpl</servlet-name>
     <url-pattern>/guslist/postdata</url-pattern>
+  </servlet-mapping>
+
+    <servlet-mapping>
+    <servlet-name>adPostDataServiceImpl</servlet-name>
+    <url-pattern>/guslist/addpost</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->
