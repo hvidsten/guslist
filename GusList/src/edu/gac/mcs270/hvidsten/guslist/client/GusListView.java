@@ -20,15 +20,18 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.TextBox;
 
 import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
+import edu.gac.mcs270.hvidsten.guslist.shared.Seller;
 
 public class GusListView {
 	private GusList control;
 
 	public GusListView(){}
-	
+
 	public void setController(GusList gusList) {
 		control = gusList;
 	}
@@ -36,45 +39,106 @@ public class GusListView {
 	public GusList getController() {
 		return control;
 	}
-	
+
 	public void viewWelcomePage(){
 		RootPanel rootPanel = RootPanel.get();
 		rootPanel.clear();
 		makeMenuBar(rootPanel);
-		
+
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		rootPanel.add(horizontalPanel, 10, 79);
 		horizontalPanel.setSize("412px", "211px");
-		
+
 		makeSideBar(horizontalPanel);
 	}
 
-	public void viewPostData(List<PostData> posts) {
-		if(posts==null) return;
-		
+	public void postAdData() {
+
 		RootPanel rootPanel = RootPanel.get();
 		rootPanel.clear();
 		makeMenuBar(rootPanel);
-		
+
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
 		rootPanel.add(horizontalPanel, 10, 79);
-		
+
 		makeSideBar(horizontalPanel);
-		
+
 		VerticalPanel dataListPanel = new VerticalPanel();
 		horizontalPanel.add(dataListPanel);
-		
+
 		FlowPanel flowPanel = new FlowPanel();
 		dataListPanel.add(flowPanel);
-		
+
+		Label progTitlebar = new Label("Create Post");
+		progTitlebar.addStyleName("appTitleBar");
+		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		flowPanel.add(progTitlebar);
+
+		HorizontalPanel namePanel = new HorizontalPanel();
+		Label nameL = new Label("Name");
+		final TextBox nameTextBox = new TextBox();
+		flowPanel.add(namePanel);
+		namePanel.add(nameL);
+		namePanel.add(nameTextBox);
+
+		HorizontalPanel titlePanel = new HorizontalPanel();
+		Label titleL = new Label("Title");
+		final TextBox titleTextBox = new TextBox();
+		flowPanel.add(titlePanel);
+		namePanel.add(titleL);
+		namePanel.add(titleTextBox);
+
+		HorizontalPanel descriptionPanel = new HorizontalPanel();
+		Label descriptionL = new Label("Description");
+		final TextArea descriptionTextBox = new TextArea();
+		flowPanel.add(descriptionPanel);
+		namePanel.add(descriptionL);
+		namePanel.add(descriptionTextBox);
+
+		HorizontalPanel pricePanel = new HorizontalPanel();
+		Label priceL = new Label("Price");
+		final TextBox priceTextBox = new TextBox();
+		flowPanel.add(pricePanel);
+		namePanel.add(priceL);
+		namePanel.add(priceTextBox);
+
+		Button submitB = new Button("Submit");
+		submitB.setText("Submit");
+		flowPanel.add(submitB);
+		submitB.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				PostData post1 = new PostData(titleTextBox.getText(), descriptionTextBox.getText(), Double.parseDouble(priceTextBox.getText()), new Seller(nameTextBox.getText())) ;
+				control.postAdDataToServer(post1);
+			}
+		});
+	}
+	public void viewPostData(List<PostData> posts) {
+		if(posts==null) return;
+
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.clear();
+		makeMenuBar(rootPanel);
+
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		rootPanel.add(horizontalPanel, 10, 79);
+
+		makeSideBar(horizontalPanel);
+
+		VerticalPanel dataListPanel = new VerticalPanel();
+		horizontalPanel.add(dataListPanel);
+
+		FlowPanel flowPanel = new FlowPanel();
+		dataListPanel.add(flowPanel);
+
 		Label progTitlebar = new Label("GusList");
 		progTitlebar.addStyleName("appTitleBar");
 		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		flowPanel.add(progTitlebar);
-		
+
 		makePostTable(posts, flowPanel);
 	}
-	
+
 	private void makePostTable(List<PostData> posts, FlowPanel flowPanel) {
 		for(PostData post: posts){
 			flowPanel.add(makePostRow(post));
@@ -98,7 +162,7 @@ public class GusListView {
 			public void onClick(ClickEvent event) {
 				// To Do
 			}
-	      });
+		});
 		row.add(titleLabel);
 		row.add(descrLabel);
 		row.add(priceLabel);
@@ -110,7 +174,7 @@ public class GusListView {
 		MenuBar menuBar = new MenuBar(false);
 		rp.add(menuBar, 94, 39);
 		menuBar.setSize("326px", "32px");
-		
+
 		MenuItem menuHomeItem = new MenuItem("Home", false, new Command() {
 			public void execute() {
 				viewWelcomePage();
@@ -118,33 +182,39 @@ public class GusListView {
 		});
 		menuHomeItem.setHTML("Home");
 		menuBar.addItem(menuHomeItem);
-		
+
 		MenuItemSeparator separator = new MenuItemSeparator();
 		menuBar.addSeparator(separator);
-		
+
 		MenuItem menuSignInItem = new MenuItem("Sign In", false, (Command) null);
 		menuSignInItem.setHTML("Sign In");
 		menuBar.addItem(menuSignInItem);
-		
+
 		MenuItem menuContactItem = new MenuItem("Contact", false, (Command) null);
 		menuContactItem.setHTML("Contact");
 		menuBar.addItem(menuContactItem);
-		
+
 		MenuItem menuHelpItem = new MenuItem("Help", false, (Command) null);
 		menuHelpItem.setHTML("Help");
 		menuBar.addItem(menuHelpItem);
 	}
-	
+
 	public void makeSideBar(HorizontalPanel hp){
 		VerticalPanel sidePanel = new VerticalPanel();
 		hp.add(sidePanel);
 		sidePanel.setSize("72px", "98px");
-		
+
 		Button postAdButton = new Button("Post Ad");
 		postAdButton.setStyleName("sideBarButton");
 		postAdButton.setText("Post Ad");
+		postAdButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				postAdData();
+			}
+		});
 		sidePanel.add(postAdButton);
-		
+
 		Button viewAdsButton = new Button("View Ads");
 		viewAdsButton.setStyleName("sideBarButton");
 		viewAdsButton.setText("View Ads");
@@ -154,11 +224,11 @@ public class GusListView {
 			public void onClick(ClickEvent event) {
 				control.viewAdDataFromServer();
 			}
-	      });
+		});
 		sidePanel.add(viewAdsButton);
-		
+
 		Hyperlink adminHyperlink = new Hyperlink("Admin Page", false, "newHistoryToken");
 		sidePanel.add(adminHyperlink);
-		
+
 	}
 }
