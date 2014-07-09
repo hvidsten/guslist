@@ -12,8 +12,8 @@ public class PostData implements IsSerializable {
 	private Buyer buyer=null;
 	
 	// GWT serializable Objects need a no=argument constructor
-	public PostData() {}
 	
+	public PostData() {}
 	public PostData(String t, String d, double p, Seller s, Buyer b){
 		title = t;
 		description = d;
@@ -22,6 +22,8 @@ public class PostData implements IsSerializable {
 		buyer = b;
 	}
 
+	
+	
 	public String getTitle() {
 		return title;
 	}
