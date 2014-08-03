@@ -1,0 +1,2 @@
+serviceClass: edu.gac.mcs270.hvidsten.guslist.client.PostDataService
+path: CEEAA22169F6EEAE8505EFE5EAD3D24A.gwt.rpc

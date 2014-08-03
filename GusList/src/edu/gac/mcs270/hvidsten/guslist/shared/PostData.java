@@ -21,7 +21,6 @@ public class PostData implements IsSerializable {
 		seller = s;
 		buyer = b;
 	}
-
 	public String getTitle() {
 		return title;
 	}

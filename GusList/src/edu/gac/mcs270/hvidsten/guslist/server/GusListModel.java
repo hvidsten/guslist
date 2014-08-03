@@ -24,7 +24,11 @@ public class GusListModel {
 				 new Seller("Joe Cool"), new Buyer("Jill Cool")));
 		data.add(new PostData("book", "Moby Dick - a classic!", 2.0,
 				 new Seller("Hermann Melville"), new Buyer("Mark Twain")));
-		
+
 		return data;
 	}
+	public static void createPostData(PostData newpost){
+		System.out.printf("Title: %s, Price: %f, description: %s , Author: %s ", newpost.getTitle(), newpost.getPrice(), newpost.getDescription(), newpost.getSeller().getname());
+	}
+
 }
