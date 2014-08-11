@@ -14,4 +14,7 @@ import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
 @RemoteServiceRelativePath("postdata") 
 public interface PostDataService extends RemoteService {
 	public List<PostData> getPostDataFromServer();
+
+	void addPostDataToServer(PostData postData);
+
 }

@@ -22,6 +22,13 @@ public class PostData implements IsSerializable {
 		buyer = b;
 	}
 
+	public PostData(String t, String d, double p, Seller s) {
+		title = t;
+		description = d;
+		price = p;
+		seller = s;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -40,6 +47,10 @@ public class PostData implements IsSerializable {
 	
 	public Buyer getBuyer() {
 		return buyer;
+	}
+	
+	public void setBuyer(Buyer buyer) {
+		this.buyer = buyer;
 	}
 }
 
