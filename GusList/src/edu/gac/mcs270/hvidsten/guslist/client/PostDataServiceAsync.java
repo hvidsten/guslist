@@ -11,4 +11,5 @@ import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
  */
 public interface PostDataServiceAsync {
 	public void getPostDataFromServer(AsyncCallback<List<PostData>> asyncCallback);
+	public void addPostToServer(PostData entry, AsyncCallback<Void> callback);
 }
