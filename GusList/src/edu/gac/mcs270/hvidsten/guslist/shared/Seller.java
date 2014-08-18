@@ -8,6 +8,15 @@ public class Seller  implements IsSerializable{
 	public Seller() {}
 	
 	public Seller(String string) {
-		name = string;
+		setName(string);
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }
