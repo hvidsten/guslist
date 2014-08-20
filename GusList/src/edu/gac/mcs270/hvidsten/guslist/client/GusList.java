@@ -7,6 +7,13 @@ import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class GusList implements EntryPoint {
 	private final GusListView glView = new GusListView();
@@ -43,5 +50,21 @@ public class GusList implements EntryPoint {
 						glView.viewPostData(data);
 					}
 				});
+	}
+	
+	public void sendAdDataToServer(PostData post){
+		System.out.println("Received the post!");
+/*		postDataService.getPostDataFromServer(
+				new AsyncCallback<List<PostData>>() {
+					public void onFailure(Throwable caught) {
+						return;
+					}
+
+					@Override
+					public void onSuccess(List<PostData> data) {
+						glView.viewPostData(data);
+					}
+				});
+				*/
 	}
 }

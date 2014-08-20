@@ -20,9 +20,12 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
+import edu.gac.mcs270.hvidsten.guslist.shared.Seller;
 
 public class GusListView {
 	private GusList control;
@@ -135,6 +138,68 @@ public class GusListView {
 		menuBar.addItem(menuHelpItem);
 	}
 	
+public void viewMakePostPage(){
+		
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.clear();
+		makeMenuBar(rootPanel);
+		
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		rootPanel.add(horizontalPanel, 10, 79);
+		
+		makeSideBar(horizontalPanel);
+		
+		VerticalPanel dataListPanel = new VerticalPanel();
+		horizontalPanel.add(dataListPanel);
+		
+		FlowPanel flowPanel = new FlowPanel();
+		dataListPanel.add(flowPanel);
+		
+		Label progTitlebar = new Label("Make a Post!");
+		progTitlebar.addStyleName("appTitleBar");
+		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		flowPanel.add(progTitlebar);
+		
+		HorizontalPanel namePanel = new HorizontalPanel();
+		Label nameLabel = new Label("Name");
+		final TextBox nameTextBox = new TextBox();
+		flowPanel.add(namePanel);
+		namePanel.add(nameLabel);
+		namePanel.add(nameTextBox);
+		
+		HorizontalPanel titlePanel = new HorizontalPanel();
+		Label titleLabel = new Label("Title");
+		final TextBox titleTextBox = new TextBox();
+		flowPanel.add(titlePanel);
+		titlePanel.add(titleLabel);
+		titlePanel.add(titleTextBox);
+		
+		HorizontalPanel descriptionPanel = new HorizontalPanel();
+		Label descriptionLabel = new Label("Description");
+		final TextArea descriptionText = new TextArea(); 
+		flowPanel.add(descriptionPanel);
+		descriptionPanel.add(descriptionLabel);
+		descriptionPanel.add(descriptionText);
+		
+		HorizontalPanel pricePanel = new HorizontalPanel();
+		Label priceLabel = new Label("Price");
+		final TextBox priceTextBox = new TextBox();
+		flowPanel.add(pricePanel);
+		pricePanel.add(priceLabel);
+		pricePanel.add(priceTextBox);
+		
+		Button submitButton = new Button("Submit");
+		submitButton.setText("Submit");
+		submitButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				PostData post = new PostData(titleTextBox.getText(), descriptionText.getText(), Double.parseDouble(priceTextBox.getText()), new Seller(nameTextBox.getText()));
+				control.sendAdDataToServer(post);
+			}
+	      });
+		flowPanel.add(submitButton);
+	}
+	
 	public void makeSideBar(HorizontalPanel hp){
 		VerticalPanel sidePanel = new VerticalPanel();
 		hp.add(sidePanel);
@@ -143,6 +208,11 @@ public class GusListView {
 		Button postAdButton = new Button("Post Ad");
 		postAdButton.setStyleName("sideBarButton");
 		postAdButton.setText("Post Ad");
+		postAdButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				viewMakePostPage();
+			}
+		});
 		sidePanel.add(postAdButton);
 		
 		Button viewAdsButton = new Button("View Ads");
