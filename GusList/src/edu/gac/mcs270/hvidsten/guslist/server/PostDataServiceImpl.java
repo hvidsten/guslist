@@ -15,7 +15,7 @@ public class PostDataServiceImpl extends RemoteServiceServlet implements
 		PostDataService {
 
 	public List<PostData> getPostDataFromServer() { 
-		List data = GusListModel.getPostData();
+		List<PostData> data = GusListModel.getPostData();
 		return data;
 	}
 }

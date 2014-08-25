@@ -9,7 +9,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class GusList implements EntryPoint {
-	private final GusListView glView = new GusListView();
+	private final GusListView gusListView = new GusListView();
 	private final PostDataServiceAsync postDataService = GWT
 			.create(PostDataService.class);
 
@@ -18,18 +18,26 @@ public class GusList implements EntryPoint {
 		//  Note: Model is on server side - can only
 		//   communicate to Model through RPC calls
 		//   Cannot wire it directly as a class attribute
-		glView.setController(GusList.this);
+		gusListView.setController(GusList.this);
 		// Show welcome page
-		glView.viewWelcomePage();
+		gusListView.viewWelcomePage();
 		//RootPanel rootPanel = RootPanel.get();
 		//rootPanel.clear();
 	}
 	
 	
 	public GusListView getView() {
-		return glView;
+		return gusListView;
 	}
 	
+	public void postAdToServer() {
+		System.out.println("Message passed");
+	}
+	public void postAdToServer(PostData data) {
+		System.out.println("Message succesfully passed");
+		
+	}
+
 	public void viewAdDataFromServer(){
 		System.out.println("got here- control - pre servlet");
 		postDataService.getPostDataFromServer(
@@ -40,7 +48,7 @@ public class GusList implements EntryPoint {
 
 					@Override
 					public void onSuccess(List<PostData> data) {
-						glView.viewPostData(data);
+						gusListView.viewPostData(data);
 					}
 				});
 	}
