@@ -20,9 +20,12 @@ import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
 import com.google.gwt.user.client.ui.MenuItemSeparator;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import edu.gac.mcs270.hvidsten.guslist.shared.PostData;
+import edu.gac.mcs270.hvidsten.guslist.shared.Seller;
 
 public class GusListView {
 	private GusList control;
@@ -46,7 +49,20 @@ public class GusListView {
 		rootPanel.add(horizontalPanel, 10, 79);
 		horizontalPanel.setSize("412px", "211px");
 		
+		VerticalPanel dataListPanel = new VerticalPanel();
+		horizontalPanel.add(dataListPanel);
+		
 		makeSideBar(horizontalPanel);
+		
+		FlowPanel flowPanel = new FlowPanel();
+		dataListPanel.add(flowPanel);
+		
+		Label progTitlebar = new Label("GusList");
+		progTitlebar.addStyleName("appTitleBar");
+		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		//flowPanel.add(progTitlebar);
+		horizontalPanel.add(progTitlebar);
+		
 	}
 
 	public void viewPostData(List<PostData> posts) {
@@ -74,6 +90,9 @@ public class GusListView {
 		
 		makePostTable(posts, flowPanel);
 	}
+	
+
+	
 	
 	private void makePostTable(List<PostData> posts, FlowPanel flowPanel) {
 		for(PostData post: posts){
@@ -143,6 +162,13 @@ public class GusListView {
 		Button postAdButton = new Button("Post Ad");
 		postAdButton.setStyleName("sideBarButton");
 		postAdButton.setText("Post Ad");
+		//add a clickListener to the button
+				postAdButton.addClickHandler(new ClickHandler() {
+					@Override
+					public void onClick(ClickEvent event) {
+						viewMakeNewAdPage();
+					}
+			      });
 		sidePanel.add(postAdButton);
 		
 		Button viewAdsButton = new Button("View Ads");
@@ -154,11 +180,92 @@ public class GusListView {
 			public void onClick(ClickEvent event) {
 				control.viewAdDataFromServer();
 			}
-	      });
+		});
 		sidePanel.add(viewAdsButton);
 		
 		Hyperlink adminHyperlink = new Hyperlink("Admin Page", false, "newHistoryToken");
-		sidePanel.add(adminHyperlink);
+				sidePanel.add(adminHyperlink);
+				
+	}
+	
+	public void viewMakeNewAdPage(){
+		RootPanel rootPanel = RootPanel.get();
+		rootPanel.clear();
+		makeMenuBar(rootPanel);
+		
+		HorizontalPanel horizontalPanel = new HorizontalPanel();
+		rootPanel.add(horizontalPanel, 10, 79);
+		horizontalPanel.setSize("412px", "211px");
+		
+		VerticalPanel dataListPanel = new VerticalPanel();
+		horizontalPanel.add(dataListPanel);
+		
+		makeSideBar(horizontalPanel);
+		
+		FlowPanel flowPanel = new FlowPanel();
+		dataListPanel.add(flowPanel);
+		
+		Label progTitlebar = new Label("GusList");
+		progTitlebar.addStyleName("appTitleBar");
+		progTitlebar.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		//flowPanel.add(progTitlebar);
+		horizontalPanel.add(progTitlebar);
+		
+		HorizontalPanel horizontalPanel2 = new HorizontalPanel();
+		rootPanel.add(horizontalPanel2, 100, 200);
+		VerticalPanel labels = enterPostInfo();
+		//labels.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		horizontalPanel2.add(labels);
+		VerticalPanel entry = textInput();
+		horizontalPanel2.add(entry);
+		
+		
 		
 	}
+	
+	public VerticalPanel enterPostInfo() {
+		VerticalPanel column = new VerticalPanel();
+		Label titleLabel = new Label("Title");
+		titleLabel.addStyleName("postLabel");
+		Label descrLabel = new Label("Description");
+		descrLabel.addStyleName("postLabel");
+		Label priceLabel = new Label("Price");
+		priceLabel.addStyleName("postLabel");
+		Label sellerLabel = new Label("Your Name");
+		priceLabel.addStyleName("postLabel");
+		column.add(titleLabel);
+		column.add(descrLabel);
+		column.add(priceLabel);
+		column.add(sellerLabel);
+		
+		return column;
+	}
+	
+	private VerticalPanel textInput() {
+		VerticalPanel column = new VerticalPanel();
+		final TextBox titleInput = new TextBox();
+		final TextArea descrInput = new TextArea();
+		final TextBox priceInput = new TextBox();
+		final TextBox sellerInput = new TextBox();
+		
+		column.add(titleInput);
+		column.add(descrInput);
+		column.add(priceInput);
+		column.add(sellerInput);
+		
+		Button infoButton = new Button("Submit");
+		infoButton.addStyleName("postInfoButton");
+		infoButton.setText("Submit");
+		//add a clickListener to the button
+		infoButton.addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				PostData newEntry = new PostData(titleInput.getText(), descrInput.getText(),Double.parseDouble(priceInput.getText()),new Seller(sellerInput.getText()));
+				control.MakePostAdDataToServer(newEntry);
+			}
+	      });
+		column.add(infoButton);
+		return column;
+	}
+	
 }

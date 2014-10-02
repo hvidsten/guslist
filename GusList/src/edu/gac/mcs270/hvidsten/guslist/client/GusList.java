@@ -44,4 +44,22 @@ public class GusList implements EntryPoint {
 					}
 				});
 	}
+
+
+	public void MakePostAdDataToServer(PostData entry) {
+		postDataService.addPostDataToServer(entry,
+				new AsyncCallback<Void>() {
+					public void onFailure(Throwable caught) {
+						return;
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+		System.out.println("posting an ad");
+		glView.viewMakeNewAdPage();
+	}
 }
